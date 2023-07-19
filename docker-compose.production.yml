@@ -8,13 +8,13 @@ volumes:
 services:
   db:
     image: postgres:13.0-alpine
-    env_file: .env
+    env_file: infra/.env
     volumes:
       - pg_data_production:/var/lib/postgresql/data
     restart: on-failure
   backend:
     image: levtigrovich/foodgram_backend:latest
-    env_file: .env
+    env_file: infra/.env
     volumes:
       - static:/app/static_backend/
       - media:/app/media_backend/
@@ -31,7 +31,7 @@ services:
 
   nginx:
     image: levtigrovich/foodgram_nginx:latest
-    env_file: .env
+    env_file: infra/.env
     volumes:
       - ./frontend/build:/usr/share/nginx/html/
       - ./docs/:/usr/share/nginx/html/api/docs/
