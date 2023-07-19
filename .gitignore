@@ -59,6 +59,7 @@ coverage.xml
 *.log
 local_settings.py
 db.sqlite3
+db.sqlite3.bak
 db.sqlite3-journal
 
 # Flask stuff:
@@ -102,7 +103,7 @@ celerybeat.pid
 *.sage.py
 
 # Environments
-.env
+infra/.env
 .venv
 env/
 venv/
@@ -130,3 +131,14 @@ dmypy.json
 
 # .idea
 .idea
+
+# node_modules
+*node_modules/
+
+# static files
+/backend/media/
+/backend/static/
+
+.nginx.conf/
+
+*__pycache__/
