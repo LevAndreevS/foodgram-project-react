@@ -231,15 +231,6 @@ class CreateUpdateRecipeSerializer(serializers.ModelSerializer):
                     'Выберите хотя бы один тэг')
         return tags
 
-    def validate_cooking_time(self, cooking_time):
-        if cooking_time < settings.TIME_MIN_COOKING:
-            raise serializers.ValidationError(
-                'Время готовки должно быть не менее одной минуты')
-        if cooking_time > settings.TIME_MAX_COOKING:
-            raise serializers.ValidationError(
-                'Время приготовления должно быть не более 10-ти часов')
-        return cooking_time
-
     def validate_ingredients(self, ingredients):
         if not ingredients:
             raise serializers.ValidationError(

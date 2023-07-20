@@ -171,6 +171,7 @@ TIME_MAX_COOKING = 600
 REGEX_FOR_USER_LOGIN = re.compile(r'^[\w.@+-]+\Z')
 REGEX_FOR_TAG_SLUG = re.compile(r'^[-a-zA-Z0-9_]+$')
 FORBIDDEN_LOGIN = 'me'
+MIN_AMOUNT = 1
 # groceryassistant.management.commands.import_csv.py
 SUCCESS_IMPORT = 'Импорт файла ingredients.csv завершен успешно!'
 DUPLICATE_INGREDIENTS = 'Такие ингредиенты уже есть!'
