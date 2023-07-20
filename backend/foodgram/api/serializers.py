@@ -240,22 +240,24 @@ class CreateUpdateRecipeSerializer(serializers.ModelSerializer):
                 'Время приготовления должно быть не более 10-ти часов')
         return cooking_time
 
-    def validate_ingredients(self, ingredients):
-        if not ingredients:
+    def validate_ingredients(self, data):
+        if not data:
             raise serializers.ValidationError(
                 'Добавьте ингредиенты!'
             )
-        ingredient = [ingredient['id'] for ingredient in ingredients]
-        if len(ingredient) != len(set(ingredient)):
-            raise serializers.ValidationError(
-                "Ингредиенты в рецепте должны быть уникальными!"
-            )
+        ingredients = self.data.get('ingredients')
+        ingredients_list = []
         for ingredient in ingredients:
-            if int(ingredient['amount']) < settings.MIN_AMOUNT_INGREDIENT:
+            ingredient_id = ingredient['id']
+            if ingredient_id in ingredients_list:
                 raise serializers.ValidationError(
-                    "Необходимо добавить хотя бы один ингредиент"
+                    'Одинаковых ингредиентов не должно быть!'
                 )
-        return ingredients
+            ingredients_list.append(ingredient_id)
+            if int(ingredient.get('amount')) < 1:
+                raise serializers.ValidationError(
+                    'Количество ингредиента должно быть больше 0')
+        return data
 
     @classmethod
     def create_ingredients(cls, recipe, ingredients):
