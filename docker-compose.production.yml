@@ -18,6 +18,7 @@ services:
     volumes:
       - static:/app/foodgram/static_backend/
       - media:/app/foodgram/media_backend/
+      - ./data/:/app/data/
     restart: on-failure
     depends_on:
       - db

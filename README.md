@@ -1,18 +1,11 @@
-![Foodgram](https://thumb.cloud.mail.ru/weblink/thumb/xw1/8noK/AMHKGiKMZ)
-![Python](https://img.shields.io/badge/python-3670A0?logo=python&logoColor=ffdd54)
-![DjangoREST](https://img.shields.io/badge/DJANGO-REST-ff1709?logo=django&logoColor=white&color=ff1709&labelColor=gray)
-![Nginx](https://img.shields.io/badge/nginx-1.21.3-blue)
-![Gunicorn](https://img.shields.io/badge/gunicorn-20.0.4-blue)
-___
 # Проект Foodgram - продуктовый помощник
 
 <details>
     <summary><b>Проект доступен по ссылкам:</b></summary>
 
 ```
-- http://foodgram072023.hopto.org/
-- http://foodgram072023.hopto.org/admin/
-- http://foodgram072023.hopto.org/api/docs/
+- https://foodgrambylev.ddns.net/
+- https://foodgrambylev.ddns.net/admin/
 ```
 </details>
 
@@ -21,8 +14,8 @@ ___
 
 ```
 - логин: admin
-- почта: mr.krot@admin.ru 
-- пароль: 3536
+- почта: leoohard@yandex.ru
+- пароль: Bingo08bingo08
 ```
 </details>
 
@@ -63,30 +56,38 @@ ___
 
 ### Технологии
 
-- Python 3.10
-- Django 4.1
-- Django REST Framework 3.14
-- Gunicorn
+- Python 3.9
+- Django 3.2.16
+- Django REST Framework 3.12.4
+- Gunicorn 20.1.0
 - Nginx
-- PostgreSQL
+- PostgreSQL 13.0
 - Docker
 
 ### Запуск проекта локально
 
 - Клонирование удаленного репозитория
 ```bash
-git clone git@github.com:vawy/foodgram-project-react.git
+git clone git@github.com:LevAndreevS/foodgram-project-react.git
 cd infra
 ```
-- В директории /infra создайте файл .env, с переменными окружения:
+- В директории /проекта создайте файл .env, с переменными окружения:
 ```bash
-SECRET_KEY=<Your_some_long_string>
-DB_ENGINE='django.db.backends.postgresql'
-DB_NAME='postgres'
-POSTGRES_USER='postgres'
-POSTGRES_PASSWORD=<Your_password>
-DB_HOST='db'
-DB_PORT=5432
+# secrets settings.py
+SECRET_KEY=key
+DEBUG=debug
+ALLOWED_HOSTS=hosts
+# database
+POSTGRES_DB=foodgram
+POSTGRES_USER=foodgram_user
+POSTGRES_PASSWORD=foodgram_password
+DB_HOST=db
+DB_PORT=port
+# secrets docker-compose.yml and docker-compose.production.yml ports
+GATEWAY_PORT=port:port
+# backend Dockerfile
+GUNICORN_HOST=0.0.0.0
+GUNICORN_PORT=8000
 ```
 - Сборка и развертывание контейнеров
 ```bash
@@ -98,7 +99,7 @@ docker-compose exec backend python manage.py createsuperuser
 ```
 - Наполните базу данных ингредиентами
 ```bash
-docker-compose exec backend python manage.py load_ingredients
+docker-compose exec backend python manage.py import_csv
 ```
 - Стандартная админ-панель Django доступна по адресу [`http://localhost/admin/`](http://localhost/admin/)
 - Документация к проекту доступна по адресу [`http://localhost/api/docs/`](`http://localhost/api/docs/`)
