@@ -1,8 +1,7 @@
 
 from django.db import models
 from foodgram import settings
-from groceryassistant.validators import (validate_amount,
-                                         validate_cooking_time,
+from groceryassistant.validators import (validate_cooking_time,
                                          validate_forbidden_characters)
 from users.models import User
 
@@ -118,7 +117,7 @@ class IngredientInRecipe(models.Model):
     amount = models.IntegerField(
         verbose_name='Количество',
         default=0,
-        validators=[validate_amount]
+        validators=[validate_cooking_time]
 
     )
 

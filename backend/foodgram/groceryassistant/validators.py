@@ -19,21 +19,10 @@ def validate_forbidden_characters(value):
     return value
 
 
-def validate_cooking_time(self, cooking_time):
-    if cooking_time < settings.TIME_MIN_COOKING:
-        raise ValidationError(
-            'Время готовки должно быть не менее одной минуты')
-    if cooking_time > settings.TIME_MAX_COOKING:
-        raise ValidationError(
-            'Время приготовления должно быть не более 10-ти часов')
-    return cooking_time
-
-
-def validate_amount(self, amount_digit):
-    if amount_digit < settings.MIN_AMOUNT:
+def validate_cooking_time(digit):
+    if digit < settings.TIME_MIN_COOKING:
         MinValueValidator(
-            settings.MIN_AMOUNT,
-            f'Минимальное количество ингридиента должно быть больше '
-            f'{settings.MIN_AMOUNT}'
+            settings.TIME_MIN_COOKING,
+            f'Минимальное время от {settings.TIME_MIN_COOKING} минуты'
         )
-    return amount_digit
+    return digit
