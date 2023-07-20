@@ -16,8 +16,8 @@ services:
     image: levtigrovich/foodgram_backend:latest
     env_file: .env
     volumes:
-      - static:/app/static_backend/
-      - media:/app/media_backend/
+      - static:/app/foodgram/static_backend/
+      - media:/app/foodgram/media_backend/
     restart: on-failure
     depends_on:
       - db

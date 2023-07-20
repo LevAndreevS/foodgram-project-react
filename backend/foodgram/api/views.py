@@ -7,22 +7,22 @@ from api.serializers import (CreateUpdateRecipeSerializer,
                              MyUserCreateSerializer, MyUserListSerializer,
                              ShoppingListSerializer, TagSerializer,
                              UserPasswordSerializer)
+from api.utils import create_model, delete_model
 from django.db.models import Sum
 from django.http.response import HttpResponse
 from django.shortcuts import get_object_or_404
-from djoser.views import UserViewSet
-from rest_framework import status
 from django_filters.rest_framework import DjangoFilterBackend
+from djoser.views import UserViewSet
+from groceryassistant.models import (Favoritelist, Ingredient,
+                                     IngredientInRecipe, RecipeList,
+                                     Shoppinglist, Tag)
+from rest_framework import status
 from rest_framework.decorators import action
 from rest_framework.permissions import (IsAuthenticated,
                                         IsAuthenticatedOrReadOnly)
 from rest_framework.response import Response
 from rest_framework.viewsets import ModelViewSet, ReadOnlyModelViewSet
 from users.models import Follow, User
-from api.utils import create_model, delete_model
-from groceryassistant.models import (Favoritelist, Ingredient,
-                                     IngredientInRecipe, RecipeList, Tag,
-                                     Shoppinglist)
 
 
 class MyUserViewSet(UserViewSet):
