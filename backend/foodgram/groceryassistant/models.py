@@ -117,7 +117,6 @@ class IngredientInRecipe(models.Model):
     amount = models.IntegerField(
         verbose_name='Количество',
         default=0,
-        validators=[validate_cooking_time]
 
     )
 
