@@ -1,12 +1,7 @@
 from django.contrib import admin
-from .models import (
-    Ingredient,
-    IngredientInRecipe,
-    RecipeList,
-    Tag,
-    Favoritelist,
-    Shoppinglist,
-)
+from groceryassistant.models import (Favoritelist, Ingredient,
+                                     IngredientInRecipe, RecipeList,
+                                     Shoppinglist, Tag)
 
 
 @admin.register(Ingredient)

@@ -1,7 +1,7 @@
-from django_filters.rest_framework import FilterSet, filters
-from rest_framework.filters import SearchFilter
 
+from django_filters.rest_framework import FilterSet, filters
 from groceryassistant.models import Ingredient, RecipeList, Tag
+from rest_framework.filters import SearchFilter
 
 
 class IngredientFilter(SearchFilter):
