@@ -1,5 +1,6 @@
 
 from django.db import models
+
 from foodgram import settings
 from groceryassistant.validators import (validate_cooking_time,
                                          validate_forbidden_characters)

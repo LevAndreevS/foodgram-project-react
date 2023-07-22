@@ -1,4 +1,7 @@
+
 from django.contrib import admin
+
+from foodgram import settings
 from groceryassistant.models import (Favoritelist, Ingredient,
                                      IngredientInRecipe, RecipeList,
                                      Shoppinglist, Tag)
@@ -9,7 +12,7 @@ class IngredientAdmin(admin.ModelAdmin):
     list_display = ('pk', 'name', 'measurement_unit')
     search_fields = ('name',)
     list_filter = ('name',)
-    empty_value_display = '-пусто-'
+    empty_value_display = settings.EMPTY
 
 
 class IngredientInRecipeInline(admin.TabularInline):
@@ -23,13 +26,13 @@ class TagAdmin(admin.ModelAdmin):
     list_display = ('pk', 'name', 'color', 'slug')
     search_fields = ('name', 'slug')
     list_filter = ('name', 'color', 'slug')
-    empty_value_display = '-пусто-'
+    empty_value_display = settings.EMPTY
 
 
 @admin.register(IngredientInRecipe)
 class IngredientInRecipeAdmin(admin.ModelAdmin):
     list_display = ('pk', 'recipe', 'ingredient', 'amount')
-    empty_value_display = '-пусто-'
+    empty_value_display = settings.EMPTY
 
 
 @admin.register(RecipeList)
@@ -40,7 +43,7 @@ class RecipeListAdmin(admin.ModelAdmin):
     inlines = [
         IngredientInRecipeInline,
     ]
-    empty_value_display = '-пусто-'
+    empty_value_display = settings.EMPTY
 
     def favorites_quantity(self, obj):
         return obj.favorites.count()
@@ -50,11 +53,11 @@ class RecipeListAdmin(admin.ModelAdmin):
 class FavoritelistAdmin(admin.ModelAdmin):
     list_display = ('pk', 'user', 'recipe')
     search_fields = ('user', 'recipe')
-    empty_value_display = '-пусто-'
+    empty_value_display = settings.EMPTY
 
 
 @admin.register(Shoppinglist)
 class ShoppinglistAdmin(admin.ModelAdmin):
     list_display = ('pk', 'user', 'recipe')
     search_fields = ('user', 'recipe')
-    empty_value_display = '-пусто-'
+    empty_value_display = settings.EMPTY

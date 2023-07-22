@@ -1,17 +1,18 @@
 
-from api.utils import Base64ImageField
-from django.conf import settings
 from django.contrib.auth.hashers import check_password
 from django.shortcuts import get_object_or_404
 from djoser.serializers import (PasswordSerializer, UserCreateSerializer,
                                 UserSerializer)
-from groceryassistant.models import (Favoritelist, Ingredient,
-                                     IngredientInRecipe, RecipeList,
-                                     Shoppinglist, Tag)
 from rest_framework import serializers, status
 from rest_framework.exceptions import ValidationError
 from rest_framework.fields import SerializerMethodField
 from rest_framework.validators import UniqueTogetherValidator
+
+from api.utils import Base64ImageField
+from foodgram import settings
+from groceryassistant.models import (Favoritelist, Ingredient,
+                                     IngredientInRecipe, RecipeList,
+                                     Shoppinglist, Tag)
 from users.models import User
 
 

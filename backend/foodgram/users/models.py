@@ -1,5 +1,7 @@
+
 from django.contrib.auth.models import AbstractUser
 from django.db import models
+
 from foodgram import settings
 from groceryassistant.validators import validate_forbidden_characters
 

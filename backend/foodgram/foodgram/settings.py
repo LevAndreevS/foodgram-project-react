@@ -1,12 +1,14 @@
+
 import os
 import re
+
 from pathlib import Path
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = os.getenv('SECRET_KEY', 'osnfoshvg89e8395-35+-+-=0-34')
 
-DEBUG = True if os.getenv('DEBUG', 'false').lower() == 'true' else False
+DEBUG = os.getenv('DEBUG', 'false').lower() == 'true'
 
 ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', 'localhost').split(',')
 
@@ -175,4 +177,7 @@ MIN_AMOUNT = 1
 SUCCESS_IMPORT = 'Импорт файла ingredients.csv завершен успешно!'
 DUPLICATE_INGREDIENTS = 'Такие ингредиенты уже есть!'
 ERROR_FIND_FILE = 'Отсутствует файл ingredients в директории backend/data'
-DATA_PATH = '/app/data/'
+PATH = str(BASE_DIR.joinpath('/foodgram/data').resolve()) + '/'
+FILENAME = 'ingredients.csv'
+# groceryassistant.admin.py
+EMPTY = '-пусто-'

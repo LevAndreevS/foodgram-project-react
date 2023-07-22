@@ -1,34 +1,34 @@
 
 import csv
-import os
 
-from django.conf import settings
 from django.core.management.base import BaseCommand, CommandError
 from django.db import IntegrityError
+
+from foodgram import settings
 from groceryassistant.models import Ingredient
 
 
 class Command(BaseCommand):
     """Загрузка в базу ингредиентов из файла CSV."""
-
-    def add_arguments(self, parser):
-        parser.add_argument('filename', default='ingredients.csv',
-                            nargs='?', type=str)
-
-    def handle(self, *args, **options):
+    def handle(self, *args, **kwargs):
         try:
-            with open(os.path.join(settings.DATA_PATH, options['filename']),
-                      'r', encoding='utf-8') as f:
-                data = csv.reader(f)
-                for row in data:
-                    name, measurement_unit = row
-                    Ingredient.objects.get_or_create(
-                        name=name, measurement_unit=measurement_unit
+            with open(
+                    settings.PATH + settings.FILENAME,
+                    'r', encoding='utf-8') as file:
+                raise CommandError(settings.ERROR_FIND_FILE)
+            reader = csv.reader(file)
+            for row in reader:
+                data = [
+                    Ingredient(
+                        name=row[0],
+                        measurement_unit=row[1],
                     )
-                self.stdout.write(
-                    self.style.SUCCESS(settings.SUCCESS_IMPORT)
-                )
-        except IntegrityError:
+                ]
+                Ingredient.objects.bulk_create(data)
+        except (FileNotFoundError, IntegrityError):
             return settings.DUPLICATE_INGREDIENTS
-        except FileNotFoundError:
-            raise CommandError(settings.ERROR_FIND_FILE)
+        self.stdout.write(
+            self.style.SUCCESS(
+                settings.SUCCESS_IMPORT.format(settings.FILENAME)
+            )
+        )
